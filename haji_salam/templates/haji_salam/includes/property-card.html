@@ -1,8 +1,15 @@
 {% load static %}
 
 <div class="col d-flex justify-content-center">
-  <div class="card" style="width: 18rem;">
-    <img src="{{ p.main_image.url }}" class="card-img-top object-fit-cover  " alt="...">
+  <div class="card position-relative" style="width: 18rem;">
+    
+    <div class="main-img-container">
+      <img src="{{ p.main_image.url }}" class="card-img-top object-fit-cover  " alt="...">
+      <div class="overlay">
+        <a class="btn">View Detials</a>
+      </div>
+    </div>
+
     <div class="card-body">
       <h5 class="card-title text-truncate">{{ p.title }}</h5>
       <div class="📍">
