@@ -1,0 +1,41 @@
+.navbar {
+  padding: 25px 75px 25px 70px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.521);
+  background-color: white;
+  z-index: 1001;
+}
+
+#brand-container img {
+  height: 75px;
+}
+
+.nav-link::after {
+  content: "";
+  display: block;
+  height: 4px;
+  width: 100%;
+  background-color: #88190E;
+  transform: scale(0);
+  transition: transform 0.2s linear;
+}
+
+.nav-link:hover::after {
+  transform: scale(1);
+}
+
+.nav-link.active::after {
+  transform: scale(1);
+}
+
+#gg {
+  margin-top: 125px;
+  height: 60vh;
+  width: 100vw;
+  background-color: #88190E;
+  color: white;
+}
+
+#gg h1 {
+  width: 50%;
+  font-size: 55px;
+}
