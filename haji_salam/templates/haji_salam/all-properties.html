@@ -1,24 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Hai Salam Real Estate{% endblock title %}
+{% block title %}All Properties{% endblock title %}
 {% block css_files %}
-  <link rel="stylesheet" href="{% static 'haji_salam/css/home.css' %}">
+  <link rel="stylesheet" href="{% static 'haji_salam/css/all-properties.css' %}">
 {% endblock css_files %}
-
 
 {% block content %}
   <div class="container pt-5 pb-5 card-container">
     <div class="row">
       <div class="col">
-        <h1 class="text-center mb-5 featured-txt">Our Featured Properties</h1>
+        <h1 class="text-center mb-5 featured-txt">All Properties</h1>
       </div>
     </div>
     <div class="row gy-5">
-      {% for p in latest_properties %}
-      {% if p.featured %}
+      {% for p in all_properties %}
         {% include 'haji_salam/includes/property-card.html' %}
-      {% endif %}
       {% endfor %}
     </div>
   </div>

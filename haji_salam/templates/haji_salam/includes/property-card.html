@@ -1,12 +1,20 @@
 {% load static %}
 
 <div class="col d-flex justify-content-center">
-  <div class="card position-relative" style="width: 18rem;">
+  <div class="card" style="width: 18rem;">
     
     <div class="main-img-container">
       <img src="{{ p.main_image.url }}" class="card-img-top object-fit-cover  " alt="...">
       <div class="overlay">
-        <a class="btn">View Detials</a>
+        <a class="btn">View Details</a>
+      </div>
+
+      
+      <div class="purpose-container">
+        {{ p.purpose }}
+      </div>
+      <div class="price-container">
+        ${{ p.price }}
       </div>
     </div>
 

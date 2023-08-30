@@ -24,7 +24,6 @@
   opacity: 1;
   display: block;
   width: 100%;
-  height: auto;
   transition: .3s ease;
   backface-visibility: hidden;
 }
