@@ -11,6 +11,10 @@ class PropertyAdmin(admin.ModelAdmin):
     PropertyImageInline,
   ]
 
+  prepopulated_fields = {
+    "prop_slug": ("title",),
+  }
+
 
 admin.site.register(Property, PropertyAdmin)
 admin.site.register(PropertyImage)

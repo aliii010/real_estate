@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.views import View
 from .models import Property
 
 # Create your views here.
@@ -15,3 +16,9 @@ class allProperties(ListView):
   model = Property
   ordering = ["-date"]
   context_object_name = "all_properties"
+
+
+class PropertyDetail(View):
+  def get(self, request, slug):
+    identified_prop = Property.objects.get(prop_slug=slug)
+    print(identified_prop)

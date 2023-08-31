@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 # Create your models here.
 
@@ -20,6 +19,7 @@ class Property(models.Model):
     ("House", "House"),
     ("Villa", "Villa"),
     ("Apartment", "Apartment"),
+    ("Commercial Apartment", "Commercial Apartment"),
     ("Office", "Office"),
     ("Land", "Land"),
     ("Shop", "Shop"),
@@ -29,7 +29,9 @@ class Property(models.Model):
   ]
 
   title = models.CharField(max_length=255)
-  date = models.DateTimeField(default=timezone.now)
+  prop_slug = models.SlugField(unique=True, db_index=True, null=True)
+  main_image = models.ImageField(upload_to="images", null=True)
+  date = models.DateTimeField(auto_now_add=True)
   city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True)
   neighborhood_or_project = models.CharField(max_length=35, null=True)
   price = models.CharField(max_length=10, null=True)
@@ -42,7 +44,6 @@ class Property(models.Model):
   furnishing = models.BooleanField(default=False)
   garden = models.BooleanField(default=False)
   featured = models.BooleanField(default=False)
-  main_image = models.ImageField(upload_to="images", null=True)
 
 
   def __str__(self) -> str:
