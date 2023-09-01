@@ -6,7 +6,7 @@
     <div class="main-img-container">
       <img src="{{ p.main_image.url }}" class="card-img-top object-fit-cover  " alt="...">
       <div class="overlay">
-        <a class="btn">View Details</a>
+        <a href="{% url 'detail-page' slug=p.prop_slug %}" class="btn">View Details</a>
       </div>
 
       
