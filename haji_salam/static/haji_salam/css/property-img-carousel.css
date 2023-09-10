@@ -1,0 +1,13 @@
+.carousel-item {
+  background-color: black;
+}
+
+.carousle-img {
+  height: 100%;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.carousel-control-icon {
+  height: 32px;
+}

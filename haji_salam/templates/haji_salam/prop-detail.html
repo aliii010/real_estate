@@ -20,5 +20,101 @@
 {% endblock contact_nav_link %}
 
 {% block content %}
-  {% include 'haji_salam/includes/property-img-carousel.html' %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-9 prop-details p-4 p-lg-5">
+
+        <div class="title-container d-flex flex-column">
+          <h3 class="mb-2">{{ prop.title }}</h3>
+          <p class="d-flex align-items-center mb-2"><img src="{% static 'haji_salam/icons/date.png' %}" alt="" class="icon me-2">{{ prop.date|date:"d/m/Y" }}</p>
+          <p class="d-felx align-items-center mb-2"><img src="{% static 'haji_salam/icons/location.png' %}" alt="" class="icon me-2">{{ prop.city|capfirst }}, {{ prop.neighborhood_or_project|capfirst }}</p>
+        </div>
+
+        <div class="carousel-container">
+
+          {% include 'haji_salam/includes/property-img-carousel.html' %}
+
+          <div class="d-flex align-items-center mt-3">
+            <img src="{% static 'haji_salam/icons/price.png' %}" alt="" class="icon me-2" style="height:50px;">
+            <div>
+              Price <b style="font-size:20px;" class="d-block">${{ prop.price }}</b>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-3">
+            <img src="{% static 'haji_salam/icons/purpose.png' %}" alt="" class="icon me-2" style="height:50px;">
+            <div>
+              Purpose of Property <b style="font-size:20px;" class="d-block">{{ prop.purpose }}</b>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-3">
+            <img src="{% static 'haji_salam/icons/area.png' %}" alt="" class="icon me-2" style="height:50px;">
+            <div>
+              Area <b style="font-size:20px;" class="d-block">{{ prop.area }}m<sup>2</sup></b>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-3">
+            <img src="{% static 'haji_salam/icons/type.png' %}" alt="" class="icon me-2" style="height:50px;">
+            <div>
+              Property Type <b style="font-size:20px;" class="d-block">{{ prop.type }}</b>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mt-3">
+            <img src="{% static 'haji_salam/icons/furniture.png' %}" alt="" class="icon me-2" style="height:50px;">
+            <div>
+              Furnishing
+              <b style="font-size:20px;" class="d-block">
+                {% if prop.furnishing %}Furnished{% else %}Unfurnished{% endif %}
+              </b>
+            </div>
+          </div>
+        </div>
+
+        <div class="property-features text-nowrap">
+          <h4 class="mb-3">Property Features</h4>
+          <div class="row gy-3">
+            <div class="col-lg-4 d-flex align-items-center">
+              <img src="{% static 'haji_salam/icons/bedroom.png' %}" alt="" class="icon me-2">
+              <b class="me-1">Bedrooms:</b> {{ prop.bedrooms }}
+            </div>
+            <div class="col-lg-4 d-flex align-items-center">
+              <img src="{% static 'haji_salam/icons/couch.png' %}" alt="" class="icon me-2">
+              <b class="me-1">Reception rooms:</b> {{ prop.reception_rooms }}
+            </div>
+            <div class="col-lg-4 d-flex align-items-center">
+              <img src="{% static 'haji_salam/icons/bathroom.png' %}" alt="" class="icon me-2">
+              <b class="me-1">Bathrooms:</b> {{ prop.bathrooms }}
+            </div>
+            <div class="col-lg-4 d-flex align-items-center">
+              <img src="{% static 'haji_salam/icons/bathroom.png' %}" alt="" class="icon me-2">
+              <b class="me-1">Kitchnes:</b> {{ prop.kitchens }}
+            </div>
+            <div class="col-lg-4 d-flex align-items-center">
+              <img src="{% static 'haji_salam/icons/garage.png' %}" alt="" class="icon me-2">
+              <b class="me-1">Garages:</b> {{ prop.garage }}
+            </div>
+            <div class="col-lg-4 d-flex align-items-center">
+              <img src="{% static 'haji_salam/icons/balcony.png' %}" alt="" class="icon me-2">
+              <b class="me-1">Balconies:</b> {{ prop.garage }}
+            </div>
+          </div>
+        </div>
+
+        <div class="location-container">
+          <h4>Location of Property</h4>
+          <h1>under development</h1>
+        </div>
+
+
+        <div class="contact-container">
+          <h4>Contact us About this Property</h4>
+          <h1>under development</h1>
+        </div>
+        
+
+      </div>
+      <div class="col-lg-3 search-filter-container d-flex align-items-center ">
+        <h1>under development</h1>
+      </div>
+    </div>
+  </div>
 {% endblock content %}

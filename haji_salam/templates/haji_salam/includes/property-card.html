@@ -1,4 +1,8 @@
 {% load static %}
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'haji_salam/css/property-card.css' %}">
+{% endblock css_files %}  
+
 
 <div class="col d-flex justify-content-center">
   <div class="card" style="width: 18rem;">
@@ -21,8 +25,8 @@
     <div class="card-body">
       <h5 class="card-title text-truncate">{{ p.title }}</h5>
       <div class="📍">
-        <div class="address d-flex align-items-center" style="margin: 0;"><img src="{% static 'haji_salam/icons/location.png' %}" alt="" class="img-fluid icon me-2">{{ p.city|capfirst }}, {{ p.neighborhood_or_project|capfirst }}</div>
-        <div class="d-flex align-items-center mb-1"><img src="{% static 'haji_salam/icons/home.png' %}" alt="" class="icon me-2">{{ p.type }}</div>
+        <div class="address d-flex align-items-center" style="margin: 0;"><img src="{% static 'haji_salam/icons/location.png' %}" alt="" class="icon me-2">{{ p.city|capfirst }}, {{ p.neighborhood_or_project|capfirst }}</div>
+        <div class="d-flex align-items-center mb-1"><img src="{% static 'haji_salam/icons/type.png' %}" alt="" class="icon me-2">{{ p.type }}</div>
       </div>
       <hr>
       <div class="📝 d-flex justify-content-around">

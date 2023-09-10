@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 from django.views import View
-from .models import Property
+from .models import Property, PropertyImage
 
 # Create your views here.
 
@@ -21,8 +21,10 @@ class allProperties(ListView):
 class PropertyDetail(View):
   def get(self, request, slug):
     identified_prop = Property.objects.get(prop_slug=slug)
+    images = PropertyImage.objects.filter(property=identified_prop)
 
     context = {
       "prop": identified_prop,
+      "images": images,
     }
     return render(request, "haji_salam/prop-detail.html", context)

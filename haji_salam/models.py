@@ -38,11 +38,14 @@ class Property(models.Model):
   purpose = models.CharField(max_length=10, choices=PURPOSES, default="Sale")
   type = models.CharField(max_length=35, choices=TYPES, default="House")
   area = models.IntegerField(null=True)
-  bedrooms = models.IntegerField(null=True, blank=True)
   reception_rooms = models.IntegerField(null=True, blank=True)
+  kitchens = models.IntegerField(null=True, blank=True)
+  bedrooms = models.IntegerField(null=True, blank=True)
   bathrooms = models.IntegerField(null=True, blank=True)
-  furnishing = models.BooleanField(default=False)
+  garage = models.IntegerField(null=True, blank=True)
+  balcony = models.IntegerField(null=True, blank=True)
   garden = models.BooleanField(default=False)
+  furnishing = models.BooleanField(default=False)
   featured = models.BooleanField(default=False)
 
 

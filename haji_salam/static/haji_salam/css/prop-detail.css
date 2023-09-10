@@ -1,14 +1,35 @@
-.carousel {
-  width: 680px;
+.icon {
+  height: 16px;
+  filter: invert(18%) sepia(24%) saturate(6553%) hue-rotate(353deg)
+    brightness(88%) contrast(96%);
 }
 
-.carousel-item {
-  height: 382px;
-
+.prop-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-img {
-  height: 100%;
+.prop-details > div {
   width: 100%;
-  object-fit: cover;
+}
+
+.search-filter-container {
+  background-color: lightpink;
+}
+
+.title-container,
+.carousel-container,
+.property-features,
+.location-container,
+.contact-container {
+  background-color: rgb(241, 241, 241);
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+@media screen and (min-width: 991px) {
+  .prop-details > div {
+    width: 85%;
+  }  
 }
