@@ -27,10 +27,8 @@
       </div>
     </div>
     <div class="row gy-5">
-      {% for p in latest_properties %}
-      {% if p.featured %}
+      {% for p in featured_properties %}
         {% include 'haji_salam/includes/property-card.html' %}
-      {% endif %}
       {% endfor %}
     </div>
   </div>

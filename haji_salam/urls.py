@@ -4,5 +4,6 @@ from . import views
 urlpatterns = [
   path("", views.home, name="home-page"),
   path("all-properties", views.allProperties.as_view(), name="all-properties-page"),
-  path("<slug:slug>", views.PropertyDetail.as_view(), name="detail-page"),
+  path("<slug:slug>/", views.PropertyDetail.as_view(), name="detail-page"),
+  path("/gg/", views.filterProperty, name="filter-property"),
 ]

@@ -25,7 +25,9 @@
     <div class="card-body">
       <h5 class="card-title text-truncate">{{ p.title }}</h5>
       <div class="📍">
-        <div class="address d-flex align-items-center" style="margin: 0;"><img src="{% static 'haji_salam/icons/location.png' %}" alt="" class="icon me-2">{{ p.city|capfirst }}, {{ p.neighborhood_or_project|capfirst }}</div>
+        <div class="address d-flex align-items-center" style="margin: 0;">
+          <img src="{% static 'haji_salam/icons/location.png' %}" alt="" class="icon me-2">{{ p.city|capfirst }}, {% if p.region %}{{ p.region|capfirst }}{% elif p.project %}{{ p.project|capfirst }}{% endif %}
+        </div>
         <div class="d-flex align-items-center mb-1"><img src="{% static 'haji_salam/icons/type.png' %}" alt="" class="icon me-2">{{ p.type }}</div>
       </div>
       <hr>

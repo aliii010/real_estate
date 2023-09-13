@@ -20,14 +20,14 @@
 {% endblock contact_nav_link %}
 
 {% block content %}
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-9 prop-details p-4 p-lg-5">
+  <div class="container-fluid" style="padding:100px;">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 prop-details">
 
         <div class="title-container d-flex flex-column">
           <h3 class="mb-2">{{ prop.title }}</h3>
           <p class="d-flex align-items-center mb-2"><img src="{% static 'haji_salam/icons/date.png' %}" alt="" class="icon me-2">{{ prop.date|date:"d/m/Y" }}</p>
-          <p class="d-felx align-items-center mb-2"><img src="{% static 'haji_salam/icons/location.png' %}" alt="" class="icon me-2">{{ prop.city|capfirst }}, {{ prop.neighborhood_or_project|capfirst }}</p>
+          <p class="d-felx align-items-center mb-2"><img src="{% static 'haji_salam/icons/location.png' %}" alt="" class="icon me-2">{{ prop.city|capfirst }}, {% if prop.region %}{{ prop.region|capfirst }}{% elif prop.project %}{{ prop.project|capfirst }}{% endif %}</p>
         </div>
 
         <div class="carousel-container">
@@ -58,46 +58,50 @@
               Property Type <b style="font-size:20px;" class="d-block">{{ prop.type }}</b>
             </div>
           </div>
-          <div class="d-flex align-items-center mt-3">
-            <img src="{% static 'haji_salam/icons/furniture.png' %}" alt="" class="icon me-2" style="height:50px;">
-            <div>
-              Furnishing
-              <b style="font-size:20px;" class="d-block">
-                {% if prop.furnishing %}Furnished{% else %}Unfurnished{% endif %}
-              </b>
+          {% if prop.type == "House" or prop.type == "Villa" or prop.type == "Apartment" %}
+            <div class="d-flex align-items-center mt-3">
+              <img src="{% static 'haji_salam/icons/furniture.png' %}" alt="" class="icon me-2" style="height:50px;">
+              <div>
+                Furnishing
+                <b style="font-size:20px;" class="d-block">
+                  {% if prop.furnishing %}Furnished{% else %}Unfurnished{% endif %}
+                </b>
+              </div>
             </div>
-          </div>
+          {% endif %}
         </div>
 
-        <div class="property-features text-nowrap">
-          <h4 class="mb-3">Property Features</h4>
-          <div class="row gy-3">
-            <div class="col-lg-4 d-flex align-items-center">
-              <img src="{% static 'haji_salam/icons/bedroom.png' %}" alt="" class="icon me-2">
-              <b class="me-1">Bedrooms:</b> {{ prop.bedrooms }}
-            </div>
-            <div class="col-lg-4 d-flex align-items-center">
-              <img src="{% static 'haji_salam/icons/couch.png' %}" alt="" class="icon me-2">
-              <b class="me-1">Reception rooms:</b> {{ prop.reception_rooms }}
-            </div>
-            <div class="col-lg-4 d-flex align-items-center">
-              <img src="{% static 'haji_salam/icons/bathroom.png' %}" alt="" class="icon me-2">
-              <b class="me-1">Bathrooms:</b> {{ prop.bathrooms }}
-            </div>
-            <div class="col-lg-4 d-flex align-items-center">
-              <img src="{% static 'haji_salam/icons/bathroom.png' %}" alt="" class="icon me-2">
-              <b class="me-1">Kitchnes:</b> {{ prop.kitchens }}
-            </div>
-            <div class="col-lg-4 d-flex align-items-center">
-              <img src="{% static 'haji_salam/icons/garage.png' %}" alt="" class="icon me-2">
-              <b class="me-1">Garages:</b> {{ prop.garage }}
-            </div>
-            <div class="col-lg-4 d-flex align-items-center">
-              <img src="{% static 'haji_salam/icons/balcony.png' %}" alt="" class="icon me-2">
-              <b class="me-1">Balconies:</b> {{ prop.garage }}
+        {% if prop.type == "House" or prop.type == "Villa" or prop.type == "Apartment" %}
+          <div class="property-features text-nowrap">
+            <h4 class="mb-3">Property Features</h4>
+            <div class="row gy-3">
+              <div class="col-lg-4 d-flex align-items-center">
+                <img src="{% static 'haji_salam/icons/bedroom.png' %}" alt="" class="icon me-2">
+                <b class="me-1">Bedrooms:</b> {{ prop.bedrooms }}
+              </div>
+              <div class="col-lg-4 d-flex align-items-center">
+                <img src="{% static 'haji_salam/icons/couch.png' %}" alt="" class="icon me-2">
+                <b class="me-1">Reception rooms:</b> {{ prop.reception_rooms }}
+              </div>
+              <div class="col-lg-4 d-flex align-items-center">
+                <img src="{% static 'haji_salam/icons/bathroom.png' %}" alt="" class="icon me-2">
+                <b class="me-1">Bathrooms:</b> {{ prop.bathrooms }}
+              </div>
+              <div class="col-lg-4 d-flex align-items-center">
+                <img src="{% static 'haji_salam/icons/bathroom.png' %}" alt="" class="icon me-2">
+                <b class="me-1">Kitchnes:</b> {{ prop.kitchens }}
+              </div>
+              <div class="col-lg-4 d-flex align-items-center">
+                <img src="{% static 'haji_salam/icons/garage.png' %}" alt="" class="icon me-2">
+                <b class="me-1">Garages:</b> {{ prop.garage }}
+              </div>
+              <div class="col-lg-4 d-flex align-items-center">
+                <img src="{% static 'haji_salam/icons/balcony.png' %}" alt="" class="icon me-2">
+                <b class="me-1">Balconies:</b> {{ prop.garage }}
+              </div>
             </div>
           </div>
-        </div>
+        {% endif %}
 
         <div class="location-container">
           <h4>Location of Property</h4>
@@ -107,14 +111,87 @@
 
         <div class="contact-container">
           <h4>Contact us About this Property</h4>
-          <h1>under development</h1>
+          <h1>udner development</h1>
         </div>
         
 
       </div>
-      <div class="col-lg-3 search-filter-container d-flex align-items-center ">
-        <h1>under development</h1>
+      <div class="col-lg-4 search-filter-container d-flex flex-column align-items-center ">
+
+        <h3 class="mb-4 text-nowrap">Filter your desired property</h3>
+
+        <div class="dropdown mb-2 w-100">
+          <button class="dropdown-toggle purpose-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Purpose of property
+          </button>
+          <ul class="dropdown-menu" style="height:initial;">
+            <li><a class="dropdown-item purpose-dropdown-item" href="" purposeValue="">All Purposes</a></li>
+            {% for purpose in purpose_choices %}
+              <li><a class="dropdown-item purpose-dropdown-item" href="" purposeValue="{{purpose.0}}">{{purpose.1}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="dropdown mb-2 w-100">
+          <button class="dropdown-toggle type-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Property Type
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item type-dropdown-item" href="" typeValue="">All Types</a></li>
+            {% for type in type_choices %}
+              <li><a class="dropdown-item type-dropdown-item" href="" typeValue="{{type.0}}">{{type.1}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="dropdown mb-2 w-100">
+          <button class="dropdown-toggle city-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            City
+          </button>
+          <ul class="dropdown-menu" style="height:initial;">
+            <li><a class="dropdown-item city-dropdown-item" href="" cityValue="">All Cities</a></li>
+            {% for city in city_choices %}
+              <li><a class="dropdown-item city-dropdown-item" href="" cityValue="{{city.0}}">{{city.1}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="dropdown mb-2 w-100">
+          <button class="dropdown-toggle region-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Region
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item region-dropdown-item" href="" regionValue="">All Regions</a></li>
+            {% for region in regions_choices %}
+              <li><a class="dropdown-item region-dropdown-item" href="" regionValue="{{region.0}}">{{region.1}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="dropdown mb-2 w-100">
+          <button class="dropdown-toggle project-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Project
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item project-dropdown-item" href="" projectValue="">All Projects</a></li>
+            {% for project in project_choices %}
+              <li><a class="dropdown-item project-dropdown-item" href="" projectValue="{{project.0}}">{{project.1}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <form method="POST" action="{% url 'filter-property' %}" class="w-100">
+          {% csrf_token %}
+          <input type="hidden" name="city" value="" class="city-field">
+          <input type="hidden" name="region" value="" class="region-field">
+          <input type="hidden" name="project" value="" class="project-field">
+          <input type="hidden" name="purpose" value="" class="purpose-field">
+          <input type="hidden" name="type" value="" class="type-field">
+          <button type="submit" class="search-filter-btn">search</button>
+        </form>
       </div>
     </div>
   </div>
+
+  <script src="{% static 'haji_salam/js/search-filter.js' %}"></script>
 {% endblock content %}
