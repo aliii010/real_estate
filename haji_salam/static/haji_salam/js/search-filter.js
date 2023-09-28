@@ -36,8 +36,6 @@ function filteringActions(dropdownItemClass, dropdownToggleClass, fieldClass, dr
   });
 };
 
-
-
 filteringActions('city-dropdown-item', 'city-toggle', 'city-field', 'cityValue');
 filteringActions('region-dropdown-item', 'region-toggle', 'region-field', 'regionValue');
 filteringActions('project-dropdown-item', 'project-toggle', 'project-field', 'projectValue');

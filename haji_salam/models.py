@@ -47,7 +47,7 @@ class Property(models.Model):
   city = models.CharField(max_length=35, choices=CITIES)
   region = models.CharField(max_length=35, choices=REGIONS, null=True, blank=True)
   project = models.CharField(max_length=35, choices=PROJECTS, null=True, blank=True)
-  price = models.CharField(max_length=10, null=True)
+  price = models.IntegerField(null=True)
   purpose = models.CharField(max_length=35, choices=PURPOSES, default="Sale")
   type = models.CharField(max_length=35, choices=TYPES, default="House")
   area = models.IntegerField(null=True)

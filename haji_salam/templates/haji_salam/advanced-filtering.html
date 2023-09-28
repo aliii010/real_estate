@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Advanded Filtering{% endblock title %}
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'haji_salam/css/advanced-filtering.css' %}">
+{% endblock css_files %}
+
+{% block home_nav_link %}
+  <a href="{% url 'home-page' %}" class="nav-link ms-5">Home</a>
+{% endblock home_nav_link %}
+{% block properties_nav_link %}
+  <a href="{% url 'all-properties-page' %}" class="nav-link ms-5">Properties</a>
+{% endblock properties_nav_link %}
+{% block about_nav_link %}
+  <a href="" class="nav-link ms-5">About Us</a>
+{% endblock about_nav_link %}
+{% block contact_nav_link %}
+  <a href="" class="nav-link ms-5">Contact Us</a>
+{% endblock contact_nav_link %}
+
+{% block content %}
+  <div class="container">
+    <h3 class="mb-4 text-nowrap text-center">Filter your desired property</h3>
+    <form method="POST" action="{% url 'filtered-properties' %}" class="w-100">
+      {% csrf_token %}
+      <div class="row search-filter-container d-flex ">
+    
+        <div class="col-6 col-lg-3 dropdown">
+          <div class="mt-0 position-absolute label">Purpose of Property:</div>
+          <button class="dropdown-toggle purpose-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            --------
+          </button>
+          <ul class="dropdown-menu" style="height:initial;">
+            <li><a class="dropdown-item purpose-dropdown-item" href="" purposeValue="">--------</a></li>
+            {% for purpose in purpose_choices %}
+              <li><a class="dropdown-item purpose-dropdown-item" href="" purposeValue="{{purpose.0}}">{{purpose.1}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <input type="hidden" name="purpose" value="" class="purpose-field">
+
+        <div class="col-6 col-lg-3 dropdown">
+          <div class="mt-0 position-absolute label">City:</div>
+          <button class="dropdown-toggle city-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            --------
+          </button>
+          <ul class="dropdown-menu" style="height:initial;">
+            <li><a class="dropdown-item city-dropdown-item" href="" cityValue="">--------</a></li>
+            {% for city in city_choices %}
+              <li><a class="dropdown-item city-dropdown-item" href="" cityValue="{{city.0}}">{{city.1}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <input type="hidden" name="city" value="" class="city-field">
+    
+        <div class="col-6 col-lg-3 dropdown">
+          <div class="mt-0 position-absolute label">Region (Neighborhood):</div>
+          <button class="dropdown-toggle region-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            --------
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item region-dropdown-item" href="" regionValue="">--------</a></li>
+            {% for region in regions_choices %}
+              <li><a class="dropdown-item region-dropdown-item" href="" regionValue="{{region.0}}">{{region.1}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <input type="hidden" name="region" value="" class="region-field">
+        
+        <div class="col-6 col-lg-3 dropdown">
+          <div class="mt-0 position-absolute label">Project:</div>
+          <button class="dropdown-toggle project-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            --------
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item project-dropdown-item" href="" projectValue="">--------</a></li>
+            {% for project in project_choices %}
+              <li><a class="dropdown-item project-dropdown-item" href="" projectValue="{{project.0}}">{{project.1}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <input type="hidden" name="project" value="" class="project-field">
+
+        <div class="col-6 col-lg-3 dropdown">
+          <div class="mt-0 position-absolute label">Property Type:</div>
+          <button class="dropdown-toggle type-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            --------
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item type-dropdown-item" href="" typeValue="">--------</a></li>
+            {% for type in type_choices %}
+              <li><a class="dropdown-item type-dropdown-item" href="" typeValue="{{type.0}}">{{type.1}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <input type="hidden" name="type" value="" class="type-field">
+
+        <div class="col-6 col-lg-3 position-relative field-container">
+          <div class="mt-0 position-absolute label">Min Arae:</div>
+          <input name="min-area" value="" type="number" placeholder="Min Arae (m²)" class="dropdown-toggle form-control">
+        </div>
+        <div class="col-6 col-lg-3 position-relative field-container">
+          <div class="mt-0 position-absolute label">Max Arae:</div>
+          <input name="max-area" value="" type="number" placeholder="Max Arae (m²)" class="dropdown-toggle form-control">
+        </div>
+        <div class="col-6 col-lg-3 position-relative field-container">
+          <div class="mt-0 position-absolute label">Min Price:</div>
+          <input name="min-price" value="" type="number" placeholder="Min Price ($)" class="dropdown-toggle form-control">
+        </div>
+        <div class="col-6 col-lg-3 position-relative field-container">
+          <div class="mt-0 position-absolute label">Max Price:</div>
+          <input name="max-price" value="" type="number" placeholder="Max Price ($)" class="dropdown-toggle form-control">
+        </div>
+        <div class="col-6 col-lg-3 position-relative field-container">
+          <div class="mt-0 position-absolute label">Reception Rooms:</div>
+          <input name="reception-rooms" value="" type="number" placeholder="Reception Rooms" class="dropdown-toggle form-control">
+        </div>
+        <div class="col-6 col-lg-3 position-relative field-container">
+          <div class="mt-0 position-absolute label">Bedrooms:</div>
+          <input name="bedrooms" value="" type="number" placeholder="Bedrooms" class="dropdown-toggle form-control">
+        </div>
+        <div class="col-6 col-lg-3 position-relative field-container">
+          <div class="mt-0 position-absolute label">Bathrooms:</div>
+          <input name="bathrooms" value="" type="number" placeholder="Bathrooms" class="dropdown-toggle form-control">
+        </div>
+        <div class="col-6 col-lg-3 position-relative field-container">
+          <div class="mt-0 position-absolute label">Kitchens:</div>
+          <input name="kitchens" value="" type="number" placeholder="Kitchens" class="dropdown-toggle form-control">
+        </div>
+        <div class="col-6 col-lg-3 position-relative field-container">
+          <div class="mt-0 position-absolute label">Garage:</div>
+          <input name="garage" value="" type="number" placeholder="Garage" class="dropdown-toggle form-control">
+        </div>
+        <div class="col-6 col-lg-3 position-relative field-container">
+          <div class="mt-0 position-absolute label">Balcony:</div>
+          <input name="balcony" value="" type="number" placeholder="Balcony" class="dropdown-toggle form-control">
+        </div>
+      
+        <input type="hidden" name="get-path" value="{{ request.path }}">
+        <button type="submit" class="search-filter-btn">Search</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="{% static 'haji_salam/js/search-filter.js' %}"></script>
+{% endblock content %}

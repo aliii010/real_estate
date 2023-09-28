@@ -21,10 +21,16 @@
 
 
 {% block content %}
-  <h1>
-    {% for p in filtered_properties %}
-      {{p.title}}
-      <hr>
-    {% endfor %}
-  </h1>
+  <div class="container pt-5 pb-5 card-container">
+    <div class="row">
+      <div class="col">
+        <h1 class="text-center mb-5 featured-txt">Result Properties</h1>
+      </div>
+    </div>
+    <div class="row gy-5">
+      {% for p in filtered_properties %}
+        {% include 'haji_salam/includes/property-card.html' %}
+      {% endfor %}
+    </div>
+  </div>
 {% endblock content %}

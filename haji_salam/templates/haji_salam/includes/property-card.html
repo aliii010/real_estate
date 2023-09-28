@@ -1,4 +1,6 @@
 {% load static %}
+{% load humanize %}
+
 {% block css_files %}
   <link rel="stylesheet" href="{% static 'haji_salam/css/property-card.css' %}">
 {% endblock css_files %}  
@@ -18,7 +20,7 @@
         {{ p.purpose }}
       </div>
       <div class="price-container">
-        ${{ p.price }}
+        ${{ p.price|intcomma }}
       </div>
     </div>
 

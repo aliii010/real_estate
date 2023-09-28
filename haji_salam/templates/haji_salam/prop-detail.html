@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block title %}{{ prop.title }}{% endblock title %}
 {% block css_files %}
   <link rel="stylesheet" href="{% static 'haji_salam/css/prop-detail.css' %}">
+  <link rel="stylesheet" href="{% static 'haji_salam/css/advanced-filtering.css' %}">
 {% endblock css_files %}
 
 {% block home_nav_link %}
@@ -20,7 +22,7 @@
 {% endblock contact_nav_link %}
 
 {% block content %}
-  <div class="container-fluid" style="padding:100px;">
+  <div class="container-fluid detail-page-container">
     <div class="row justify-content-center">
       <div class="col-lg-8 prop-details">
 
@@ -37,7 +39,7 @@
           <div class="d-flex align-items-center mt-3">
             <img src="{% static 'haji_salam/icons/price.png' %}" alt="" class="icon me-2" style="height:50px;">
             <div>
-              Price <b style="font-size:20px;" class="d-block">${{ prop.price }}</b>
+              Price <b style="font-size:20px;" class="d-block">${{ prop.price|intcomma }}</b>
             </div>
           </div>
           <div class="d-flex align-items-center mt-3">
@@ -97,7 +99,7 @@
               </div>
               <div class="col-lg-4 d-flex align-items-center">
                 <img src="{% static 'haji_salam/icons/balcony.png' %}" alt="" class="icon me-2">
-                <b class="me-1">Balconies:</b> {{ prop.garage }}
+                <b class="me-1">Balconies:</b> {{ prop.balcony }}
               </div>
             </div>
           </div>
@@ -180,15 +182,17 @@
           </ul>
         </div>
 
-        <form method="POST" action="{% url 'filter-property' %}" class="w-100">
+        <form method="POST" action="{% url 'filtered-properties' %}" class="w-100">
           {% csrf_token %}
           <input type="hidden" name="city" value="" class="city-field">
           <input type="hidden" name="region" value="" class="region-field">
           <input type="hidden" name="project" value="" class="project-field">
           <input type="hidden" name="purpose" value="" class="purpose-field">
           <input type="hidden" name="type" value="" class="type-field">
+          <input type="hidden" name="get-path" value="{{ request.path }}">
           <button type="submit" class="search-filter-btn">search</button>
         </form>
+        <a href="{% url "advanced-search" %}">Advanced Search</a>
       </div>
     </div>
   </div>
