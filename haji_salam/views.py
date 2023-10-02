@@ -36,16 +36,16 @@ class PropertyDetail(View):
     return render(request, "haji_salam/prop-detail.html", context)
 
 
-def applyFilter(entered_data, filtered_properties, **kwargs):
-  if entered_data != '' and entered_data is not None:
+class filterProperty(View):
+
+  def apply_filter(self, entered_data, filtered_properties, **kwargs):
+    if entered_data != '' and entered_data is not None:
       for key, value in kwargs.items():
         #key is the model field, and the value is the entered_data when calling the function
         return filtered_properties.filter(**{key: value})
-  else: #if the entered_data is an empty string or is none then don't filter it.
-    return filtered_properties
-
-
-class filterProperty(View):
+    else: #if the entered_data is an empty string or is none then don't filter it.
+      return filtered_properties
+    
   def get(self, request):
 
     context = {
@@ -59,40 +59,37 @@ class filterProperty(View):
 
   def post(self, request):
     filtered_properties = Property.objects.all()
-    entered_purpose = request.POST['purpose']
-    entered_city = request.POST['city'].lower()
-    entered_region = request.POST['region']
-    entered_project = request.POST['project']
-    entered_type = request.POST['type']
-    
-    filtered_properties = applyFilter(entered_purpose, filtered_properties, purpose=entered_purpose)
-    filtered_properties = applyFilter(entered_city, filtered_properties, city=entered_city)
-    filtered_properties = applyFilter(entered_region, filtered_properties, region=entered_region)
-    filtered_properties = applyFilter(entered_project, filtered_properties, project=entered_project)
-    filtered_properties = applyFilter(entered_type, filtered_properties, type=entered_type)
+    field_data = {
+      "purpose": request.POST['purpose'],
+      "city": request.POST['city'],
+      "region": request.POST['region'],
+      "project": request.POST['project'],
+      "type": request.POST['type'],
+    }
 
     if request.POST['get-path'] == "/advanced-search/":
-      entered_min_area = request.POST['min-area']
-      entered_max_area = request.POST['max-area']
-      entered_min_price = request.POST['min-price']
-      entered_max_price = request.POST['max-price']
-      entered_reception_rooms = request.POST['reception-rooms']
-      entered_bedrooms = request.POST['bedrooms']
-      entered_bathrooms = request.POST['bathrooms']
-      entered_kitchens = request.POST['kitchens']
-      entered_garage = request.POST['garage']
-      entered_balcony = request.POST['balcony']
+      field_data = {
+        "purpose": request.POST['purpose'],
+        "city": request.POST['city'],
+        "region": request.POST['region'],
+        "project": request.POST['project'],
+        "area__gte": request.POST['min-area'],
+        "area__lte": request.POST['max-area'],
+        "price__gte": request.POST['min-price'],
+        "price__lte": request.POST['max-price'],
+        "reception_rooms": request.POST['reception-rooms'],
+        "bedrooms": request.POST['bedrooms'],
+        "bathrooms": request.POST['bathrooms'],
+        "kitchens": request.POST['kitchens'],
+        "garage": request.POST['garage'],
+        "balcony": request.POST['balcony'],
+      }
 
-      filtered_properties = applyFilter(entered_min_area, filtered_properties, area__gte=entered_min_area)
-      filtered_properties = applyFilter(entered_max_area, filtered_properties, area__lte=entered_max_area)
-      filtered_properties = applyFilter(entered_min_price, filtered_properties, price__gte=entered_min_price)
-      filtered_properties = applyFilter(entered_max_price, filtered_properties, price__lte=entered_max_price)
-      filtered_properties = applyFilter(entered_reception_rooms, filtered_properties, reception_rooms=entered_reception_rooms)
-      filtered_properties = applyFilter(entered_bedrooms, filtered_properties, bedrooms=entered_bedrooms)
-      filtered_properties = applyFilter(entered_bathrooms, filtered_properties, bathrooms=entered_bathrooms)
-      filtered_properties = applyFilter(entered_kitchens, filtered_properties, kitchens=entered_kitchens)
-      filtered_properties = applyFilter(entered_garage, filtered_properties, garage=entered_garage)
-      filtered_properties = applyFilter(entered_balcony, filtered_properties, balcony=entered_balcony)
+    for model_field, entered_data in field_data.items():
+      kwargs = {
+        model_field: entered_data,
+      }
+      filtered_properties = self.apply_filter(entered_data, filtered_properties, **kwargs)
 
     context = {
       "filtered_properties": filtered_properties,
