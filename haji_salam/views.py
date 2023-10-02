@@ -34,7 +34,16 @@ class PropertyDetail(View):
       "project_choices": Property.PROJECTS,
     }
     return render(request, "haji_salam/prop-detail.html", context)
-  
+
+
+def applyFilter(entered_data, filtered_properties, **kwargs):
+  if entered_data != '' and entered_data is not None:
+      for key, value in kwargs.items():
+        #key is the model field, and the value is the entered_data when calling the function
+        return filtered_properties.filter(**{key: value})
+  else: #if the entered_data is an empty string or is none then don't filter it.
+    return filtered_properties
+
 
 class filterProperty(View):
   def get(self, request):
@@ -50,27 +59,17 @@ class filterProperty(View):
 
   def post(self, request):
     filtered_properties = Property.objects.all()
+    entered_purpose = request.POST['purpose']
     entered_city = request.POST['city'].lower()
     entered_region = request.POST['region']
     entered_project = request.POST['project']
-    entered_purpose = request.POST['purpose']
     entered_type = request.POST['type']
     
-    if entered_purpose != '' and entered_purpose is not None:
-      filtered_properties = filtered_properties.filter(purpose=entered_purpose)
-
-    if entered_type != '' and entered_type is not None:
-      filtered_properties = filtered_properties.filter(type=entered_type)
-    
-    if entered_city != '' and entered_city is not None:
-      filtered_properties = filtered_properties.filter(city=entered_city)
-
-    if entered_region != '' and entered_region is not None:
-      filtered_properties = filtered_properties.filter(region=entered_region)
-
-    if entered_project != '' and entered_project is not None:
-      filtered_properties = filtered_properties.filter(project=entered_project)
-
+    filtered_properties = applyFilter(entered_purpose, filtered_properties, purpose=entered_purpose)
+    filtered_properties = applyFilter(entered_city, filtered_properties, city=entered_city)
+    filtered_properties = applyFilter(entered_region, filtered_properties, region=entered_region)
+    filtered_properties = applyFilter(entered_project, filtered_properties, project=entered_project)
+    filtered_properties = applyFilter(entered_type, filtered_properties, type=entered_type)
 
     if request.POST['get-path'] == "/advanced-search/":
       entered_min_area = request.POST['min-area']
@@ -84,35 +83,16 @@ class filterProperty(View):
       entered_garage = request.POST['garage']
       entered_balcony = request.POST['balcony']
 
-      if entered_min_area != '' and entered_min_area is not None:
-        filtered_properties = filtered_properties.filter(area__gte=entered_min_area)
-
-      if entered_max_area != '' and entered_max_area is not None:
-        filtered_properties = filtered_properties.filter(area__lte=entered_max_area)
-
-      if entered_min_price != '' and entered_min_price is not None:
-        filtered_properties = filtered_properties.filter(price__gte=entered_min_price)
-
-      if entered_max_price != '' and entered_max_price is not None:
-        filtered_properties = filtered_properties.filter(price__lte=entered_max_price)
-
-      if entered_reception_rooms != '' and entered_reception_rooms is not None:
-        filtered_properties = filtered_properties.filter(reception_rooms=entered_reception_rooms)
-
-      if entered_bedrooms != '' and entered_bedrooms is not None:
-        filtered_properties = filtered_properties.filter(bedrooms=entered_bedrooms)
-
-      if entered_bathrooms != '' and entered_bathrooms is not None:
-        filtered_properties = filtered_properties.filter(bathrooms=entered_bathrooms)
-
-      if entered_kitchens != '' and entered_kitchens is not None:
-        filtered_properties = filtered_properties.filter(kitchens=entered_kitchens)
-        
-      if entered_garage != '' and entered_garage is not None:
-        filtered_properties = filtered_properties.filter(garage=entered_garage)
-        
-      if entered_balcony != '' and entered_balcony is not None:
-        filtered_properties = filtered_properties.filter(balcony=entered_balcony)
+      filtered_properties = applyFilter(entered_min_area, filtered_properties, area__gte=entered_min_area)
+      filtered_properties = applyFilter(entered_max_area, filtered_properties, area__lte=entered_max_area)
+      filtered_properties = applyFilter(entered_min_price, filtered_properties, price__gte=entered_min_price)
+      filtered_properties = applyFilter(entered_max_price, filtered_properties, price__lte=entered_max_price)
+      filtered_properties = applyFilter(entered_reception_rooms, filtered_properties, reception_rooms=entered_reception_rooms)
+      filtered_properties = applyFilter(entered_bedrooms, filtered_properties, bedrooms=entered_bedrooms)
+      filtered_properties = applyFilter(entered_bathrooms, filtered_properties, bathrooms=entered_bathrooms)
+      filtered_properties = applyFilter(entered_kitchens, filtered_properties, kitchens=entered_kitchens)
+      filtered_properties = applyFilter(entered_garage, filtered_properties, garage=entered_garage)
+      filtered_properties = applyFilter(entered_balcony, filtered_properties, balcony=entered_balcony)
 
     context = {
       "filtered_properties": filtered_properties,
