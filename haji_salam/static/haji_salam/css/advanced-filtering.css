@@ -52,8 +52,20 @@
 .search-filter-btn:hover {
   background-color: #88180ed4;
 }
+
 .label {
   top: -30px;
   left: 15px;
   font-weight: bold;
+}
+
+.overlay-img {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  top: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
 }

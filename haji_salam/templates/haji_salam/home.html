@@ -1,23 +1,43 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Hai Salam Real Estate{% endblock title %}
+{% block title %}
+  Haji Salam Real Estate
+{% endblock title %}
+
 {% block css_files %}
+  <link rel="stylesheet" href="{% static 'haji_salam/css/advanced-filtering.css' %}">
   <link rel="stylesheet" href="{% static 'haji_salam/css/home.css' %}">
 {% endblock css_files %}
 
 {% block home_nav_link %}
   <a href="{% url 'home-page' %}" class="nav-link ms-5 active" aria-current="page">Home</a>
 {% endblock home_nav_link %}
+
 {% block properties_nav_link %}
   <a href="{% url 'all-properties-page' %}" class="nav-link ms-5">Properties</a>
 {% endblock properties_nav_link %}
+
 {% block about_nav_link %}
   <a href="" class="nav-link ms-5">About Us</a>
 {% endblock about_nav_link %}
+
 {% block contact_nav_link %}
-  <a href="" class="nav-link ms-5">Contaxt Us</a>
+  <a href="" class="nav-link ms-5">Contact Us</a>
 {% endblock contact_nav_link %}
+
+{% block banner %}
+  <div class="overlay-img" style="background-image: url({% static 'haji_salam/images/home-img.jpeg' %})"></div>
+
+  <div class="col-md-10 col-lg-7 wta d-flex align-items-center justify-content-center">
+    <p class="wta-txt">Your journey to get a comfortable home is really close</p>
+  </div>
+
+  <div class="col-md-10 col-lg-5 search-filter d-flex flex-column justify-content-center p-5">
+    <p>Search your dream home below</p>
+    {% include "haji_salam/includes/property-dropdowns.html" %}
+  </div>
+{% endblock banner %}
 
 {% block content %}
   <div class="container pt-5 pb-5 card-container">
@@ -32,5 +52,7 @@
       {% endfor %}
     </div>
   </div>
-{% endblock content %}
 
+  <script src="{% static 'haji_salam/js/live-search.js' %}"></script>
+  <script src="{% static 'haji_salam/js/search-filter.js' %}"></script>
+{% endblock content %}

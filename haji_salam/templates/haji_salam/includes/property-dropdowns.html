@@ -1,0 +1,90 @@
+<div class="dropdown mb-2 w-100">
+  <button class="dropdown-toggle purpose-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Purpose of property
+  </button>
+  <ul class="dropdown-menu p-1" style="height:initial;">
+    <input type="text" class="form-control" placeholder="Search" id="purpose-live-search-input">
+    <li><a class="dropdown-item purpose-dropdown-item" href="" purposeValue="">All Purposes</a></li>
+    {% comment %}
+      because the choices are a list of tuples, we store the first (index0) item of each tuple in the value attr and show the the second item (index 1) to the user. same for all dropdowns.
+    {% endcomment %}
+    <div id="purpose-dropdown-box">
+      {% for purpose in purpose_choices %}
+        <li><a class="dropdown-item purpose-dropdown-item" href="" purposeValue="{{purpose.0}}">{{purpose.1}}</a></li>
+      {% endfor %}
+    </div>
+  </ul>
+</div>
+
+<div class="dropdown mb-2 w-100">
+  <button class="dropdown-toggle type-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Property Type
+  </button>
+  <ul class="dropdown-menu p-1">
+    <input type="text" class="form-control" placeholder="Search" id="type-live-search-input">
+    <li><a class="dropdown-item type-dropdown-item" href="" typeValue="">All Types</a></li>
+    <div id="type-dropdown-box">
+      {% for type in type_choices %}
+        <li><a class="dropdown-item type-dropdown-item" href="" typeValue="{{type.0}}">{{type.1}}</a></li>
+      {% endfor %}
+    </div>
+  </ul>
+</div>
+
+<div class="dropdown mb-2 w-100">
+  <button class="dropdown-toggle city-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    City
+  </button>
+  <ul class="dropdown-menu p-1" style="height:initial;">
+    <input type="text" class="form-control" placeholder="Search" id="city-live-search-input">
+    <li><a class="dropdown-item city-dropdown-item" href="" cityValue="">All Cities</a></li>
+    <div id="city-dropdown-box">
+      {% for city in city_choices %}
+        <li><a class="dropdown-item city-dropdown-item" href="" cityValue="{{city.0}}">{{city.1}}</a></li>
+      {% endfor %}
+    </div>
+  </ul>
+</div>
+
+<div class="dropdown mb-2 w-100">
+  <button class="dropdown-toggle region-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Region
+  </button>
+  <ul class="dropdown-menu p-1">
+    <input type="text" class="form-control" placeholder="Search" id="region-live-search-input">
+    <li><a class="dropdown-item region-dropdown-item" href="" regionValue="">All Regions</a></li>
+    <div id="region-dropdown-box">
+      {% for region in regions_choices %}
+        <li><a class="dropdown-item region-dropdown-item" href="" regionValue="{{region.0}}">{{region.1}}</a></li>
+      {% endfor %}
+    </div>
+  </ul>
+</div>
+
+<div class="dropdown mb-2 w-100">
+  <button class="dropdown-toggle project-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Project
+  </button>
+  <ul class="dropdown-menu p-1">
+    <input type="text" class="form-control" placeholder="Search" id="project-live-search-input">
+    <li><a class="dropdown-item project-dropdown-item" href="" projectValue="">All Projects</a></li>
+    <div id="project-dropdown-box">
+      {% for project in project_choices %}
+        <li><a class="dropdown-item project-dropdown-item" href="" projectValue="{{project.0}}">{{project.1}}</a></li>
+      {% endfor %}
+    </div>
+  </ul>
+</div>
+
+
+<form method="POST" action="{% url 'filtered-properties' %}" class="w-100">
+  {% csrf_token %}
+  <input type="hidden" name="city" value="" class="city-field">
+  <input type="hidden" name="region" value="" class="region-field">
+  <input type="hidden" name="project" value="" class="project-field">
+  <input type="hidden" name="purpose" value="" class="purpose-field">
+  <input type="hidden" name="type" value="" class="type-field">
+  <input type="hidden" name="get-path" value="{{ request.path }}">
+  <button type="submit" class="search-filter-btn">search</button>
+</form>
+<a href="{% url "advanced-search" %}">Advanced Search</a>

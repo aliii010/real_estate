@@ -1,0 +1,16 @@
+.overlay-img {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  top: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
+
+.wta {
+  padding: 50px;
+  font-size: 60px;
+}

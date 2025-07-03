@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}All Properties{% endblock title %}
+{% block title %}
+  All Properties
+{% endblock title %}
+
 {% block css_files %}
   <link rel="stylesheet" href="{% static 'haji_salam/css/all-properties.css' %}">
 {% endblock css_files %}
@@ -9,14 +12,17 @@
 {% block home_nav_link %}
   <a href="{% url 'home-page' %}" class="nav-link ms-5">Home</a>
 {% endblock home_nav_link %}
+
 {% block properties_nav_link %}
-  <a href="{% url 'all-properties-page' %}" class="nav-link ms-5 active " aria-current="page">Properties</a>
+  <a href="{% url 'all-properties-page' %}" class="nav-link ms-5 active" aria-current="page">Properties</a>
 {% endblock properties_nav_link %}
+
 {% block about_nav_link %}
-  <a href="" class="nav-link ms-5">About Us</a>
+  <a href="#" class="nav-link ms-5">About Us</a>
 {% endblock about_nav_link %}
+
 {% block contact_nav_link %}
-  <a href="" class="nav-link ms-5">Contaxt Us</a>
+  <a href="#" class="nav-link ms-5">Contact Us</a>
 {% endblock contact_nav_link %}
 
 {% block content %}
@@ -29,6 +35,10 @@
     <div class="row gy-5">
       {% for p in all_properties %}
         {% include 'haji_salam/includes/property-card.html' %}
+      {% empty %}
+        <div class="col text-center">
+          <p>No properties available at the moment.</p>
+        </div>
       {% endfor %}
     </div>
   </div>

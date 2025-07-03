@@ -8,9 +8,17 @@ from .models import Property, PropertyImage
 
 def home(request):
   featured_properties = Property.objects.filter(featured=True).order_by("-date")
-  return render(request, "haji_salam/home.html", {
+
+  context = {
     'featured_properties': featured_properties,
-  })
+    "purpose_choices": Property.PURPOSES,
+    "type_choices": Property.TYPES,
+    "city_choices": Property.CITIES,
+    "regions_choices": Property.REGIONS,
+    "project_choices": Property.PROJECTS,
+  }
+
+  return render(request, "haji_salam/home.html", context)
 
 class allProperties(ListView):
   template_name = 'haji_salam/all-properties.html'

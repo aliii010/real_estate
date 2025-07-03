@@ -45,9 +45,10 @@
     </nav>
   </header>
 
-  <div id="gg" class="d-flex flex-column justify-content-center align-items-center ">
-    <h1>Finding your dream place to live in with your fmaily is easier with us!</h1>
-    <a href="{% url "advanced-search" %}">Advanced Search</a>
+  <div class="container-fluid ">
+    <div class="row banner d-flex justify-content-center">
+      {% block banner %}{% endblock banner %}
+    </div>
   </div>
   
   {% block content %}{% endblock %}

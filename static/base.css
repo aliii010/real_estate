@@ -31,14 +31,9 @@ body {
   transform: scale(1);
 }
 
-#gg {
+.banner {
+  position: relative;
   margin-top: 125px;
-  height: 60vh;
-  background-color: #88190E;
   color: white;
-}
-
-#gg h1 {
-  width: 50%;
-  font-size: 55px;
+  background-color: rgba(0, 0, 0, 0.326);
 }
