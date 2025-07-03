@@ -7,7 +7,7 @@
 ### Clone the project
 
 ```bash
-git clone https://github.com/aliii010/uni_food.git
+git clone https://github.com/aliii010/real_estate.git
 ```
 
 ### Go to the project directory
@@ -45,3 +45,25 @@ pip install -r requirements.txt
 ```bash
 python manage.py runserver
 ```
+
+## Preview
+
+### 🏡 Homepage
+
+![Homepage](file_uploads/images/home-page.png)
+
+### 🏘️ Properties Page
+
+![Properties Page](file_uploads/images/all-properties-page.png)
+
+### 🔎 Advanced Search Page
+
+![Advanced Search Page](file_uploads/images/advanced-search-page.png)
+
+### 🧾 Detail Page
+
+![Detail Page](file_uploads/images/detail-page.png)
+
+### 🗂️ Detail Page 2
+
+![Detail Page 2](file_uploads/images/detail-page-2.png)
